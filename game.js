@@ -13,7 +13,6 @@ $(document).keypress(() => {
     nextSequence();
     started = true;
   }
-  console.log(started);
 });
 
 // user clicked button will animate and play sound file
@@ -77,3 +76,13 @@ animatePress = (currentColor) => {
     $("#" + currentColor).removeClass("pressed");
   }, 100);
 };
+
+$(".hide").click(() => {
+  $("#how-to").slideToggle(function () {
+    if ($(this).css("display") === "none") {
+      $(".hide").text("Show tutorial");
+    } else {
+      $(".hide").text("Hide tutorial");
+    }
+  });
+});

@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Offside&display=swap");
 body {
-  text-align: center;
   background-color: #171717;
 }
 
 #level-title {
+  text-align: center;
   font-family: "Offside", cursive;
   font-size: 3rem;
   margin: 5%;
@@ -12,6 +12,7 @@ body {
 }
 
 .container {
+  text-align: center;
   display: block;
   width: 50%;
   margin: auto;
@@ -50,4 +51,58 @@ body {
 .pressed {
   box-shadow: 0 0 20px gold;
   background-color: grey;
+}
+
+.container-t {
+  text-align: center;
+}
+
+#how-to {
+  margin-top: 10px;
+  font-family: "Offside", cursive;
+  font-size: 1rem;
+  color: #fef2bf;
+  text-align: center;
+}
+
+#how-to li {
+  margin-top: 10px;
+  list-style: none;
+}
+
+.hide {
+  margin-top: 5px;
+  margin-left: 35px;
+  margin-bottom: 10px;
+  font-family: "Offside", cursive;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border-style: none;
+  background-color: #ff7676;
+  color: #171717;
+  box-shadow: 2px 2px #fef2bf;
+}
+
+.hide:hover {
+  opacity: 0.8;
+}
+.hide:active {
+  background-color: #5dae8b;
+  transform: translateY(4px);
+}
+
+.footer {
+  text-align: center;
+  font-family: "Offside", cursive;
+  font-size: 1rem;
+  color: #fef2bf;
+}
+
+.footer a {
+  color: #ff7676;
+  /* padding: 15px 25px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
 }
