@@ -5,15 +5,42 @@ let gamePattern = [];
 let userClickedPattern = [];
 let started = false;
 let level = 0;
+// mediaQuery for tablets and mobile devices
+const mobile = window.matchMedia("(max-width: 489px) and (min-width: 200px)");
+const tablet = window.matchMedia("(max-width: 850px) and (min-width: 490px)");
+const pc_Laptops = window.matchMedia("(min-width: 490px)");
 
-// a keypress event is fired and the nextSequence() is fired only once when the game starts, sound and flash effects to
-$(document).keypress(() => {
-  if (!started) {
-    $("#level-title").text("Level " + level);
-    nextSequence();
-    started = true;
+function widthChangeCallback() {
+  if (mobile.matches || tablet.matches) {
+    // an event listener for non pc's or laptops
+    $(".tryAgain").click(() => {
+      if (!started) {
+        $("#level-title").text("Level " + level);
+        $("#mobile-title").css("visibility", "hidden");
+        nextSequence();
+        started = true;
+      }
+
+      $(".tryAgain").text("Try again?");
+      $(".tryAgain").addClass("hidden");
+    });
+  } else if (pc_Laptops.matches) {
+    // a keypress event is fired and the nextSequence() is fired only once when the game starts.
+    $(document).keypress(() => {
+      if (!started) {
+        $("#level-title").text("Level " + level);
+        $("#pc-title").css("visibility", "hidden");
+        nextSequence();
+        started = true;
+      }
+    });
   }
-});
+}
+
+mobile.addListener(widthChangeCallback);
+tablet.addListener(widthChangeCallback);
+pc_Laptops.addListener(widthChangeCallback);
+widthChangeCallback(); // Call it once to handle the initial state
 
 // user clicked button will animate and play sound file
 $(".btn").click(function () {
@@ -33,6 +60,15 @@ checkAnswer = (currentLevel) => {
         nextSequence();
       }, 1000);
     }
+  } else if (mobile.matches || tablet.matches) {
+    $("body").addClass("game-over");
+    setTimeout(() => {
+      $("#level-title").text("Game Over, Press Try Again? To Play ");
+      $("body").removeClass("game-over");
+    }, 200);
+    $(".tryAgain").removeClass("hidden");
+    playSound(soundWrong);
+    startOver();
   } else {
     $("body").addClass("game-over");
     setTimeout(() => {
@@ -76,13 +112,3 @@ animatePress = (currentColor) => {
     $("#" + currentColor).removeClass("pressed");
   }, 100);
 };
-
-$(".hide").click(() => {
-  $("#how-to").slideToggle(function () {
-    if ($(this).css("display") === "none") {
-      $(".hide").text("Show tutorial");
-    } else {
-      $(".hide").text("Hide tutorial");
-    }
-  });
-});

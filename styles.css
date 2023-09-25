@@ -3,29 +3,60 @@ body {
   background-color: #171717;
 }
 
+.body-contianer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* title style h1 */
 #level-title {
-  text-align: center;
   font-family: "Offside", cursive;
-  font-size: 3rem;
-  margin: 5%;
+  font-size: 2.5rem;
   color: #fef2bf;
 }
 
-.container {
+#mobile-title {
+  font-family: "Offside", cursive;
+  font-size: 2.5rem;
+  color: #fef2bf;
   text-align: center;
-  display: block;
-  width: 50%;
-  margin: auto;
+  visibility: hidden;
 }
 
+#pc-title {
+  font-family: "Offside", cursive;
+  font-size: 2.5rem;
+  color: #fef2bf;
+  text-align: center;
+}
+
+/* container for the blocks */
+.container {
+  display: grid;
+  grid-template-columns: 220px 220px;
+  grid-template-rows: 220px 220px;
+  place-items: center;
+  gap: 10px;
+}
+/* blocks style */
 .btn {
-  margin: 25px;
-  display: inline-block;
+  /* margin: 25px; */
+  /* display: inline-block; */
   height: 200px;
   width: 200px;
   /* border: 10px solid #e23e57; */
   border-radius: 20%;
 }
+
+.btn:hover {
+  opacity: 99%;
+  box-shadow: 0 0 20px gold;
+}
+
+/* blocks color */
 
 .game-over {
   background-color: #ff7676;
@@ -48,32 +79,28 @@ body {
   background-color: #f6f49d;
 }
 
+/* Pressed button effect */
 .pressed {
   box-shadow: 0 0 20px gold;
   background-color: grey;
 }
 
-.container-t {
-  text-align: center;
-}
-
-#how-to {
-  margin-top: 10px;
+/* tutorial text popup */
+.swal {
   font-family: "Offside", cursive;
   font-size: 1rem;
   color: #fef2bf;
+  width: 600px !important;
   text-align: center;
 }
 
-#how-to li {
-  margin-top: 10px;
+.swal li {
   list-style: none;
+  padding-top: 15px;
 }
 
+/* tutorial button to show popup again */
 .hide {
-  margin-top: 5px;
-  margin-left: 35px;
-  margin-bottom: 10px;
   font-family: "Offside", cursive;
   font-weight: bold;
   font-size: 1.2rem;
@@ -82,17 +109,42 @@ body {
   background-color: #ff7676;
   color: #171717;
   box-shadow: 2px 2px #fef2bf;
+  margin-top: 40px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    background-color: #5dae8b;
+    transform: translateY(4px);
+  }
 }
 
-.hide:hover {
-  opacity: 0.8;
-}
-.hide:active {
-  background-color: #5dae8b;
-  transform: translateY(4px);
+.tryAgain {
+  visibility: hidden;
+  font-family: "Offside", cursive;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border-style: none;
+  background-color: #ff7676;
+  color: #171717;
+  box-shadow: 2px 2px #fef2bf;
+  margin-top: 20px;
+  margin-bottom: 15px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    background-color: #5dae8b;
+    transform: translateY(4px);
+  }
 }
 
+/* footer  */
 .footer {
+  margin-top: -100px;
   text-align: center;
   font-family: "Offside", cursive;
   font-size: 1rem;
@@ -102,7 +154,86 @@ body {
 .footer a {
   color: #ff7676;
   /* padding: 15px 25px; */
-  text-align: center;
   text-decoration: none;
-  display: inline-block;
+}
+
+/* for mobile screens */
+@media only screen and (max-width: 489px) and (min-width: 200px) {
+  #level-title {
+    font-family: "Offside", cursive;
+    font-size: 2.5rem;
+    color: #fef2bf;
+    text-align: center;
+  }
+
+  #mobile-title {
+    visibility: visible;
+  }
+
+  #pc-title {
+    visibility: hidden;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 170px 170px;
+    grid-template-rows: 170px 170px;
+    place-items: center;
+    gap: 10px;
+  }
+  .btn {
+    /* margin: 25px; */
+    /* display: inline-block; */
+    height: 150px;
+    width: 150px;
+    /* border: 10px solid #e23e57; */
+    border-radius: 20%;
+  }
+  .tryAgain {
+    visibility: visible;
+  }
+}
+
+/* for ipad and medium screens */
+
+@media only screen and (max-width: 850px) and (min-width: 490px) {
+  #level-title {
+    font-family: "Offside", cursive;
+    font-size: 2.5rem;
+    color: #fef2bf;
+    text-align: center;
+  }
+
+  #mobile-title {
+    visibility: visible;
+  }
+
+  #pc-title {
+    visibility: hidden;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 220px 220px;
+    grid-template-rows: 220px 220px;
+    place-items: center;
+    gap: 10px;
+  }
+  .btn {
+    /* margin: 25px; */
+    /* display: inline-block; */
+    height: 200px;
+    width: 200px;
+    /* border: 10px solid #e23e57; */
+    border-radius: 20%;
+  }
+  .tryAgain {
+    visibility: visible;
+  }
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
 }
