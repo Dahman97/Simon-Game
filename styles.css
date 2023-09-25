@@ -8,7 +8,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
 }
 
 /* title style h1 */
@@ -144,7 +144,6 @@ body {
 
 /* footer  */
 .footer {
-  margin-top: -100px;
   text-align: center;
   font-family: "Offside", cursive;
   font-size: 1rem;
@@ -188,6 +187,10 @@ body {
     /* border: 10px solid #e23e57; */
     border-radius: 20%;
   }
+
+  .btn:hover {
+    box-shadow: none !important;
+  }
   .tryAgain {
     visibility: visible;
   }
@@ -224,6 +227,10 @@ body {
     width: 200px;
     /* border: 10px solid #e23e57; */
     border-radius: 20%;
+  }
+
+  .btn:hover {
+    box-shadow: none !important;
   }
   .tryAgain {
     visibility: visible;
