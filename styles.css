@@ -11,6 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  position: relative;
 }
 
 /* title style h1 */
@@ -26,6 +27,7 @@ body {
   color: #fef2bf;
   text-align: center;
   visibility: hidden;
+  margin-top: 80px;
 }
 
 #pc-title {
@@ -181,6 +183,7 @@ body {
 
   #mobile-title {
     visibility: visible;
+    font-size: 1.5rem;
   }
 
   #pc-title {

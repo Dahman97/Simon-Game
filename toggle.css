@@ -13,6 +13,7 @@ body.light-mode {
 
 .settings-container {
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
   gap: 25px;
@@ -77,4 +78,10 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+@media only screen and (max-width: 489px) and (min-width: 200px) {
+  .settings-container {
+    width: 90%;
+  }
 }
