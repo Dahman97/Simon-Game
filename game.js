@@ -75,6 +75,9 @@ checkAnswer = (currentLevel) => {
     }, 200);
     $(".tryAgain").removeClass("hidden");
     playSound(wrongSound);
+    if (currentGameHighScore > highScore) {
+      highScore = currentGameHighScore;
+    }
     saveHighScore();
     startOver();
   } else {
