@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simon</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="toggle.css" />
   </head>
 
   <body>
@@ -35,6 +36,34 @@
           <a href="https://discord.com/users/248857022869536769">Dahman</a>
         </em>
       </p>
+      <div class="settings-container">
+        <div class="toggle">
+          <p>Mute Effects</p>
+          <label class="switch">
+            <input type="checkbox" id="sound-toggle" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="toggle">
+          <p>Background Music</p>
+          <label class="switch">
+            <input type="checkbox" id="music-toggle" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="toggle">
+          <p>Light Mode</p>
+          <label class="switch">
+            <input type="checkbox" id="light-mode-toggle" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div id="highestScore">
+        <h2 class="high-score">Highest Score</h2>
+        <p class="highestScore">0</p>
+      </div>
     </div>
   </body>
+  <footer></footer>
 </html>

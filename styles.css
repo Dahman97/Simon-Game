@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Offside&display=swap");
 body {
   background-color: #171717;
+  font-family: "Offside", cursive;
+  color: #fef2bf;
 }
 
 .body-contianer {
@@ -8,7 +10,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 100vh;
 }
 
 /* title style h1 */
@@ -140,6 +142,18 @@ body {
     background-color: #5dae8b;
     transform: translateY(4px);
   }
+}
+
+#highestScore {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.highestScore {
+  margin-top: -10px;
+  font-size: 2rem;
 }
 
 /* footer  */

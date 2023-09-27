@@ -1,10 +1,17 @@
 const buttonColors = ["red", "green", "yellow", "blue"];
-const soundWrong = "wrong";
+const wrongSound = "wrong";
+let isSoundMuted = false;
+let darkMode = false;
+let backgroundMusic = "migiComp";
+let isMusicPlaying = false;
 
 let gamePattern = [];
 let userClickedPattern = [];
 let started = false;
 let level = 0;
+let highScore = 0;
+currentGameHighScore = 0;
+let highScores = [];
 // mediaQuery for tablets and mobile devices
 const mobile = window.matchMedia("(max-width: 489px) and (min-width: 200px)");
 const tablet = window.matchMedia("(max-width: 850px) and (min-width: 490px)");
@@ -67,7 +74,8 @@ checkAnswer = (currentLevel) => {
       $("body").removeClass("game-over");
     }, 200);
     $(".tryAgain").removeClass("hidden");
-    playSound(soundWrong);
+    playSound(wrongSound);
+    saveHighScore();
     startOver();
   } else {
     $("body").addClass("game-over");
@@ -75,7 +83,11 @@ checkAnswer = (currentLevel) => {
       $("#level-title").text("Game Over, Press Any Key to Restart ");
       $("body").removeClass("game-over");
     }, 200);
-    playSound(soundWrong);
+    playSound(wrongSound);
+    if (currentGameHighScore > highScore) {
+      highScore = currentGameHighScore;
+    }
+    saveHighScore();
     startOver();
   }
 };
@@ -88,6 +100,7 @@ nextSequence = () => {
   let randomChosenColor = buttonColors[randomNumber];
   gamePattern.push(randomChosenColor);
   level++;
+  currentGameHighScore++;
   $("#level-title").text("level " + level);
   animatePress(randomChosenColor);
   playSound(randomChosenColor);
@@ -97,13 +110,64 @@ startOver = () => {
   level = 0;
   gamePattern = [];
   started = false;
+  currentGameHighScore = 0; // resets the current high score
 };
+
+// toogles settings for dark mode and mute sound
+
+$(document).ready(function () {
+  $("#sound-toggle").change(function () {
+    isSoundMuted = $(this).is(":checked");
+    // Optionally, you can add logic to provide user feedback
+    if (isSoundMuted == true) {
+      isSoundMuted = true;
+    } else {
+      isSoundMuted = false;
+    }
+  });
+});
+
+$(document).ready(function () {
+  $("#light-mode-toggle").change(function () {
+    // Toggle the 'dark-mode' class on the body element
+    $("body").toggleClass("light-mode", $(this).is(":checked"));
+  });
+});
 
 // a function to play sounds based on the color argument passed
 playSound = (color) => {
-  let audio = new Audio(`./sounds/${color}.mp3`);
-  audio.play();
+  if (!isSoundMuted) {
+    let audio = new Audio(`./sounds/${color}.mp3`);
+    audio.play();
+  }
 };
+
+// play background music
+let music = new Audio(`./sounds/${backgroundMusic}.mp3`);
+
+playBackgroundMusic = (backgroundMusic) => {
+  if (isMusicPlaying) {
+    music.loop = true;
+    music.play();
+  } else {
+    music.pause(); // Pause the music if it's not playing
+    music.currentTime = 0; // Reset the playback to the beginning
+  }
+};
+
+// ...
+
+$(document).ready(function () {
+  $("#music-toggle").change(function () {
+    isMusicPlaying = $(this).is(":checked");
+    if (isMusicPlaying) {
+      playBackgroundMusic(backgroundMusic);
+    } else {
+      isMusicPlaying = false;
+      playBackgroundMusic(backgroundMusic); // Call to stop the music
+    }
+  });
+});
 
 // animate the buttons when pressed
 animatePress = (currentColor) => {
@@ -112,3 +176,36 @@ animatePress = (currentColor) => {
     $("#" + currentColor).removeClass("pressed");
   }, 100);
 };
+
+// save highScore in local stoarge
+const savedHighScore = JSON.parse(localStorage.getItem("highScore"));
+saveHighScore = () => {
+  const score = {
+    score: highScore,
+  };
+
+  // Get the saved high score from local storage
+
+  // Check if there is no saved high score or if the current high score is greater
+  if (!savedHighScore || score.score > savedHighScore[0].score) {
+    // Update the high score array with the new high score
+    highScores = [score];
+    // Update the displayed high score
+    $(".highestScore").text(score.score);
+    // Save the updated high score to local storage
+    localStorage.setItem("highScore", JSON.stringify(highScores));
+  } else {
+    // If the current high score is not greater, update only the displayed high score
+    highScore = score.score; // Update the current session's high score
+    $(".highestScore").text(score.score); // Update the displayed high score
+  }
+};
+
+$(document).ready(function () {
+  // Initialize the high score from local storage or set it to 0
+  if (savedHighScore && savedHighScore.length > 0) {
+    highScore = savedHighScore[0].score;
+  }
+  // Update the displayed high score
+  $(".highestScore").text(highScore);
+});
